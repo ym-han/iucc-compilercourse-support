@@ -58,7 +58,7 @@
   (lambda (e)
     (match e
       [(Var x)
-       (dict-ref x)]
+       (dict-ref env x)]
       [(Int n) (Int n)]
       [(Let x e body)
        (let* ([x* (gensym x)]
@@ -73,6 +73,9 @@
     [(Program info e) (Program info ((uniquify-exp '()) e))]))
 
 ;; remove-complex-opera* : Lvar -> Lvar^mon
+;; ensures that each subexpression of a primitive op or fn call
+;; is a variable or integer, that is, an atomic expression.
+;; This pass introduces temporary variables to hold the results of complex subexpressions.
 (define (remove-complex-opera* p)
   (error "TODO: code goes here (remove-complex-opera*)"))
 
