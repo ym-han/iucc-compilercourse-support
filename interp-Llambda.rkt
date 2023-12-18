@@ -27,6 +27,8 @@
       (match e
         [(Lambda (list `[,xs : ,Ts] ...) rT body)
          (Function xs body env)]
+        [(UncheckedCast e t)
+         (recur e)]
         [else ((super interp-exp env) e)]))
     ))
 
